@@ -1,121 +1,145 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+import { useNavigate } from 'react-router-dom'
 import './App.css'
 
+const places = [
+  'Chennai',
+  'Coimbatore',
+  'Madurai',
+  'Salem',
+  'Tiruchirappalli',
+  'Vellore',
+]
+
+const routes = [
+  {
+    from: 'Chennai',
+    to: 'Madurai',
+    buses: [
+      { name: 'Kaveri Express', time: '06:30 AM', type: 'AC Sleeper' },
+      { name: 'Southern Star', time: '09:15 AM', type: 'Semi Sleeper' },
+      { name: 'Night Rider', time: '10:20 PM', type: 'Sleeper' },
+    ],
+  },
+  {
+    from: 'Coimbatore',
+    to: 'Salem',
+    buses: [
+      { name: 'Blue Arrow', time: '07:10 AM', type: 'AC Seater' },
+      { name: 'Hill Line', time: '01:45 PM', type: 'Seater' },
+    ],
+  },
+  {
+    from: 'Tiruchirappalli',
+    to: 'Vellore',
+    buses: [
+      { name: 'East Coast', time: '05:40 AM', type: 'AC Seater' },
+      { name: 'Crescent', time: '04:30 PM', type: 'Sleeper' },
+    ],
+  },
+]
+
 function App() {
-  const [count, setCount] = useState(0)
+  const navigate = useNavigate()
+  const [from, setFrom] = useState('')
+  const [to, setTo] = useState('')
+  const [hasSearched, setHasSearched] = useState(false)
+
+  const matches = routes.filter(
+    (route) => route.from === from && route.to === to
+  )
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setHasSearched(true)
+  }
+
+  const handleAddNewBus = () => {
+    navigate('/add-new-bus')
+  }
+
+  const handleEditBusTiming = () => {
+    window.alert('Edit bus timing clicked')
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="page">
+      <header className="hero">
+        <p className="eyebrow">onKbus route guide</p>
+        <h1>Find the bus route in seconds.</h1>
+      </header>
 
-      <div className="ticks"></div>
+      <section className="panel-grid">
+        <div className="panel route-panel">
+          <div className="panel-header">
+            <h2>Where is my bus?</h2>
+            <p>Choose your start and destination to reveal matching buses.</p>
+          </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+          <form className="route-form" onSubmit={handleSubmit}>
+            <label className="field">
+              <span>From</span>
+              <select value={from} onChange={(event) => setFrom(event.target.value)}>
+                <option value="">Select boarding stop</option>
+                {places.map((place) => (
+                  <option key={place} value={place}>
+                    {place}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="field">
+              <span>To</span>
+              <select value={to} onChange={(event) => setTo(event.target.value)}>
+                <option value="">Select drop stop</option>
+                {places.map((place) => (
+                  <option key={place} value={place}>
+                    {place}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <button type="submit" disabled={!from || !to}>
+              Show buses
+            </button>
+          </form>
+
+          <div className="results">
+            {!hasSearched && (
+              <div className="results-footer">
+                <p className="hint">Select both stops to view available buses.</p>
+                <div className="card-actions">
+                  <button type="button" className="card-action" onClick={handleAddNewBus}>
+                    Add new bus
+                  </button>
+                  <button type="button" className="card-action" onClick={handleEditBusTiming}>
+                    Edit bus timing
+                  </button>
+                </div>
+              </div>
+            )}
+            {hasSearched && from && to && matches.length === 0 && (
+              <p className="empty">No buses found on this route yet.</p>
+            )}
+            {hasSearched && matches.length > 0 && (
+              <ul>
+                {matches[0].buses.map((bus) => (
+                  <li key={`${bus.name}-${bus.time}`}>
+                    <div>
+                      <h3>{bus.name}</h3>
+                      <p>{bus.type}</p>
+                    </div>
+                    <span>{bus.time}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </div>
   )
 }
 
