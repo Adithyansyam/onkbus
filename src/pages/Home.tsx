@@ -13,21 +13,11 @@ function Home() {
         <form className="route-form">
           <div className="form-row">
             <label htmlFor="fromStop">From</label>
-            <select id="fromStop" name="fromStop" defaultValue="">
-              <option value="" disabled>Select boarding stop</option>
-              <option value="central">Central Station</option>
-              <option value="market">Market Road</option>
-              <option value="river">Riverside Loop</option>
-            </select>
+            <input id="fromStop" name="fromStop" type="text" placeholder="Enter boarding stop" />
           </div>
           <div className="form-row">
             <label htmlFor="toStop">To</label>
-            <select id="toStop" name="toStop" defaultValue="">
-              <option value="" disabled>Select drop stop</option>
-              <option value="campus">City Campus</option>
-              <option value="museum">Museum Quarter</option>
-              <option value="east">East Park</option>
-            </select>
+            <input id="toStop" name="toStop" type="text" placeholder="Enter drop stop" />
           </div>
           <button className="primary-button" type="button">Show buses</button>
           <p className="form-helper">Select both stops to view available buses.</p>

@@ -4,8 +4,11 @@
 
 .home-page {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  min-height: 100svh;
+  padding-top: 32px;
+  padding-bottom: 32px;
 }
 
 .topbar {
@@ -73,7 +76,7 @@
 }
 
 .route-card {
-  width: min(520px, 100%);
+  width: min(520px, calc(100% - 20px));
   padding: 28px 26px 30px;
   background: rgba(12, 14, 20, 0.88);
   border: 1px solid rgba(255, 255, 255, 0.06);
