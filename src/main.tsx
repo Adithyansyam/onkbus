@@ -1,19 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import App from './App'
 import './index.css'
-import App from './App.tsx'
-import AddNewBus from './pages/AddNewBus.tsx'
-import EditBusRoute from './pages/EditBusRoute.tsx'
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root')
+
+if (!rootElement) {
+  throw new Error('Root element #root not found')
+}
+
+createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/add-new-bus" element={<AddNewBus />} />
-        <Route path="/edit-bus-route" element={<EditBusRoute />} />
-      </Routes>
-    </BrowserRouter>
-  </StrictMode>,
+    <App />
+  </StrictMode>
 )
