@@ -18,31 +18,25 @@
 
 body {
   margin: 0;
-  background:
-    radial-gradient(820px 360px at 50% 92%, rgba(255, 130, 20, 0.85), rgba(255, 130, 20, 0) 70%),
-    linear-gradient(
-      180deg,
-      #bac3e8 0%,
-      #c7b9e8 20%,
-      #d7addb 38%,
-      #e6a8c8 52%,
-      #f1a78e 68%,
-      #f49345 82%,
-      #f26f00 100%
-    );
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: #fafbfd;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.4) 1.5px, transparent 1.5px);
+  background-size: 32px 32px;
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 18px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+  animation: dots-drift 40s linear infinite;
 }
 
 #root {
   max-width: 1100px;
   margin: 0 auto;
   min-height: 100svh;
+  position: relative;
+  z-index: 1;
 }
 
 h1,
@@ -71,6 +65,21 @@ button,
 select,
 input {
   font-family: inherit;
+}
+
+@keyframes dots-drift {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: -64px -64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
 }
 
 @media (max-width: 1024px) {
