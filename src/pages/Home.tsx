@@ -24,7 +24,7 @@ function Home() {
         </form>
 
         <div className="secondary-link">
-          <Link to="/edit">Edit routes</Link>
+          <Link to="/edit">Add new bus</Link>
         </div>
       </section>
     </div>

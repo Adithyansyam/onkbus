@@ -19,7 +19,7 @@ function EditBusRoute() {
       <section className="panel route-card">
         <div className="card-header">
           <p className="eyebrow"><span className="brand">onKbus</span> &mdash; Route Management</p>
-          <h1 className="card-title">Edit bus route</h1>
+          <h1 className="card-title">Add new bus</h1>
           <p className="card-subtitle">Add or update routes, timing, and bus types from this panel.</p>
         </div>
 
