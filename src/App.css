@@ -319,8 +319,64 @@
     padding: 24px 18px 40px;
   }
 
+  .route-card {
+    width: 100%;
+    padding: 22px 20px 26px;
+    border-radius: 20px;
+  }
+
+  .card-title {
+    font-size: 24px;
+  }
+
+  .card-subtitle {
+    font-size: 14px;
+  }
+
+  .route-form {
+    gap: 16px;
+  }
+
+  .form-row input,
+  .form-row select,
+  .edit-time-input {
+    padding: 14px 14px;
+    border-radius: 16px;
+  }
+
+  .primary-button {
+    padding: 14px 18px;
+    font-size: 15px;
+  }
+
+  .suggestion-item {
+    padding: 12px 12px;
+  }
+
   .menu-button {
     width: 100%;
     justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 18px 14px 32px;
+  }
+
+  .route-card {
+    padding: 20px 18px 24px;
+  }
+
+  .card-title {
+    font-size: 22px;
+  }
+
+  .card-subtitle {
+    font-size: 13px;
+  }
+
+  .form-row label {
+    letter-spacing: 0.6px;
   }
 }
