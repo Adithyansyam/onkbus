@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createBusRoute } from '../services/busRoutes'
 
 function EditBusRoute() {
   const [busName, setBusName] = useState('')
@@ -6,12 +7,30 @@ function EditBusRoute() {
   const [to, setTo] = useState('')
   const [time, setTime] = useState('')
   const [period, setPeriod] = useState<'AM' | 'PM'>('AM')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // TODO: wire this to your backend
-    console.log({ busName, from, to, time, period })
-    alert('Route submitted')
+    if (isSubmitting) {
+      return
+    }
+
+    setIsSubmitting(true)
+
+    try {
+      await createBusRoute({ busName, from, to, time, period })
+      setBusName('')
+      setFrom('')
+      setTo('')
+      setTime('')
+      setPeriod('AM')
+      alert('Route submitted')
+    } catch (error) {
+      console.error('Failed to save route', error)
+      alert('Failed to save route. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -96,7 +115,9 @@ function EditBusRoute() {
             </div>
           </div>
 
-          <button className="primary-button" type="submit">Save route</button>
+          <button className="primary-button" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Saving...' : 'Save route'}
+          </button>
           <p className="form-helper">All fields are required to add or update a route.</p>
         </form>
       </section>
