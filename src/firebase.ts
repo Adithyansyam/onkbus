@@ -3,13 +3,13 @@ import { getAnalytics, isSupported } from 'firebase/analytics'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyB1EbH9k20h-Wmy0jrrWRc4wfcg9IFdZbk',
-  authDomain: 'onkbus.firebaseapp.com',
-  projectId: 'onkbus',
-  storageBucket: 'onkbus.firebasestorage.app',
-  messagingSenderId: '1098995622160',
-  appId: '1:1098995622160:web:859cc44348b72484490595',
-  measurementId: 'G-ZZTZ8XL5R2',
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 }
 
 export const app = initializeApp(firebaseConfig)
